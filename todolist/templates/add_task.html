@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todo App</title>
+        <style>
+
+            body{
+                height: 95vh;
+                width: 95vw;
+                background-color: black;
+                color: white;
+            }
+            h1 {
+                text-align: center;
+            }
+            .container{
+                font-family: cursive;
+                width: 100%;
+                height: 100%;
+            }
+            .task_form{
+                width:80%;
+                height: 80%;
+                margin: auto;
+                background-color: black;
+                border-radius: 10px;
+                overflow: false;
+                padding-left: 2vw;
+                padding-right: 2vw;
+
+            }
+            form{
+                width: 70%;
+                margin: auto;
+                font-size: 150%;
+                font-family: Gill Sans, sans-serif;
+            }
+            form>div{
+                width: 100%;
+                height: 5%;
+                border-radius: 10px;
+                padding-top: 3%;
+                display: flex;
+                justify-content: space-between;
+                border-radius: 20px;
+            }
+            label {
+                font-weight: 800;
+            }
+            [type="date"] {
+                background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat;
+                width: 45%;
+                padding: 12px;
+                border-radius: 20px;
+                border: 1px solid hsl(225, 90%, 75%);
+            }
+
+            input[type=text], textarea, date, select {
+                width: 45%;
+                padding: 12px;
+                border: 1px solid hsl(225, 90%, 75%);
+                background-color: white;
+                border-radius: 20px;
+                resize: vertical;
+                font-weight: 800;
+                margin-right: 0px;
+            }
+            select{
+                width: 48%;
+            }
+            .more_actions{
+                width: 100%;
+                display: flex;
+            }
+            .add_task, .reset, input[type=submit]{
+                height: 50px;
+                width: 30%;
+                border-radius: 20px;
+                box-shadow: 0px 10px 0px 0px hsl(225, 100%, 70%);
+                margin: auto;
+            }
+            a, input[type=submit]{
+                color: #8A2BE2;
+                font-size: 160%;
+                font-weight: 700;
+                font-family: cursive;
+                background-color: transparent;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+            }
+            a:hover, input[type=submit]:hover{
+                color: red;
+                box-shadow: 0px 10px 0px 0px red;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1>Add Task</h1>
+            <div class="task_form">
+                <form action="/todo/add_task/confirm" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <label for="title">Title </label>
+                        <input id="title" type="text" name="title">
+                    </div>
+                    <div>
+                        <label for="content">Content </label>
+                        <input id="content" type="text" name="content">
+                    </div>
+                    <div>
+                        <label for="category">Category </label>
+                        <select id="category" name="category">
+                            {% for category in categories %}
+                                <option value="{{ category.name }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+<!--                    <div>-->
+<!--                        <label for="lable">Lable </label>-->
+<!--                        <input id="lable" type="text" name="lable">-->
+<!--                    </div>-->
+                    <div>
+                        <label for="date">Date </label>
+                        <input id="date" type="date" name="date" value="2020-09-11">
+                    </div>
+                    <div>
+                        <p>{{ response.response }}</p>
+                    </div>
+                    <div class="more_actions">
+                        <a href="/todo/add_task" class="reset">Reset</a>
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

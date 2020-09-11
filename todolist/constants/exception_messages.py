@@ -1,0 +1,35 @@
+INVALID_CATEGORY_NAME_EXCEPTION = (
+    'category should not be empty', 'INVALID_CATEGORY_NAME_EXCEPTION'
+)
+
+CATEGORY_ADDED_SUCCESSFULLY = (
+    'category added succesfully', 'CATEGORY_ADDED_SUCCESSFULLY'
+)
+
+LABLE_CREATED_SUCCESSFULLY = (
+    'lable added successfully', 'LABLE_CREATED_SUCCESSFULLY'
+)
+
+INVALID_LABLE_NAME_EXCEPTION = (
+    'lable should not be empty', 'INVALID_LABLE_NAME_EXCEPTION'
+)
+
+INVALID_CATEGORY_EXCEPTION = (
+    'invalid category choice', 'INVALID_CATEGORY_EXCEPTION'
+)
+
+INVALID_LABLE_EXCEPTION = (
+    'invalid lable choice', 'INVALID_LABLE_EXCEPTION'
+)
+
+TASK_ADDED_SUCCESSFULLY = (
+    'task added successfully', 'TASK_ADDED_SUCCESSFULLY'
+)
+
+INVALID_VALUE_FOR_TITLE_EXCEPTION = (
+    'Title should be valid', 'INVALID_VALUE_FOR_TITLE_EXCEPTION'
+)
+
+INVALID_VALUE_FOR_CONTENT_EXCEPTION = (
+    'Content should be valid', 'INVALID_VALUE_FOR_CONTENT_EXCEPTION'
+)
