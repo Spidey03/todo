@@ -42,3 +42,11 @@ class PresenterInterface(abc.ABC):
     @abc.abstractmethod
     def raise_invalid_value_for_content(self):
         pass
+
+    @abc.abstractmethod
+    def response_get_categories(self, category_dtos):
+        pass
+
+    @abc.abstractmethod
+    def resposne_get_task(self, task_details_dto):
+        pass

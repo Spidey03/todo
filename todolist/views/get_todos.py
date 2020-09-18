@@ -13,6 +13,6 @@ def get_todos(request):
     from todolist.interactors.get_todos import GetTodos
     interactor = GetTodos(storage=storage, presenter=presenter)
     todos = interactor.get_todos_wrapper()
-    return render(request, "home.html",
+    return render(request, "home1.html",
                   {"todos": todos})
 

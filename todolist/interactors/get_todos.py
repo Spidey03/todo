@@ -1,18 +1,10 @@
 from dataclasses import dataclass
 
 from todolist.interactors.presenters.presenter_interface import PresenterInterface
-from todolist.interactors.storages.dtos import TaskLableDTO
 from todolist.interactors.storages.stroage_interface import StorageInterface
 
 
-@dataclass
-class TaskDetailsDTO:
-    id: int
-    title: str
-    content: str
-    date: str
-    category: str
-    task_lables: TaskLableDTO
+
 
 
 class GetTodos:
@@ -38,6 +30,8 @@ class GetTodos:
         return task_details_dtos
 
     def _convert_to_task_details_dtos(self, categories, lables, tasks):
+        from todolist.interactors.storages.dtos \
+            import TaskDetailsDTO
         task_details_dtos = []
         for task in tasks:
             category = self._get_category_for_task(

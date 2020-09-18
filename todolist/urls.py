@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from todolist.views.add_task import add_task
 from todolist.views.add_task_confirm import add_task_confirm
+from todolist.views.get_task import get_task
 from todolist.views.get_todos import get_todos
 
 urlpatterns = [
@@ -10,4 +11,5 @@ urlpatterns = [
     url(r'^$', get_todos, name="TodoList"),
     url(r'^add_task$', add_task, name="AddTask"),
     url(r'^add_task/confirm$', add_task_confirm, name="AddTaskConfirm"),
+    url(r'^todos/<int: task_id>/$', get_task, name="GetTask")
 ]

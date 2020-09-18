@@ -19,8 +19,8 @@
                 height: 100%;
             }
             .todos{
-                width:80%;
-                height: 80%;
+                width:90%;
+                height: 90%;
                 overflow-x: visible;
                 overflow-y: auto;
                 margin: auto;
@@ -88,9 +88,9 @@
 
         <div class="container">
             <h1> ToDos</h1>
-            <div class="todos">
+            <div class="todos row">
                 {% for task in todos %}
-                <div class="task" onclick="location.href='get_todos/{{ task.task_id }}';" style="cursor:pointer;">
+                <div class="task" onclick="location.href='todos/{{ task.task_id }}';" style="cursor:pointer;">
                     <div class="task_content">
                         <div class="title">{{ task.title }}</div>
                         <div class="description">{{ task.content }}</div>

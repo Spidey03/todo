@@ -116,15 +116,7 @@ class PresenterImplementation(PresenterInterface):
     def response_get_todos(self, task_details_dtos):
         tasks = []
         for task in task_details_dtos:
-            tasks.append({
-                'task_id': task.id,
-                'title': task.title,
-                'content': task.content,
-                'category': task.category,
-                'date': task.date,
-                'lables': self._get_lables_for_task(
-                    task.task_lables, task.id)
-            })
+            tasks.append(self._get_task_details(task_details_dto=task))
         return tasks
 
     @staticmethod
@@ -132,3 +124,30 @@ class PresenterImplementation(PresenterInterface):
         lables = [task_lable.lable_name for task_lable in task_lables
                   if task_id == task_lable.task_id]
         return lables
+
+    def response_get_categories(self, category_dtos):
+        categories = []
+        for category_dto in category_dtos:
+            categories.append({
+                'category_id': category_dto.id,
+                'name': category_dto.name
+            })
+        return categories
+
+    def resposne_get_task(self, task_details_dto):
+        task_details = self._get_task_details(
+            task_details_dto=task_details_dto)
+        return task_details
+
+    def _get_task_details(self, task_details_dto):
+        task_details = {
+            'task_id': task_details_dto.id,
+            'title': task_details_dto.title,
+            'content': task_details_dto.content,
+            'category': task_details_dto.category,
+            'date': str(task_details_dto.date),
+            'lables': self._get_lables_for_task(
+                task_details_dto.task_lables, task_details_dto.id)
+        }
+        return task_details
+

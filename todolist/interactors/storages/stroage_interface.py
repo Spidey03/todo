@@ -1,4 +1,7 @@
 import abc
+from typing import List
+
+from todolist.interactors.storages.dtos import TaskDTO, CategoryDTO, TaskLableDTO
 
 
 class StorageInterface(abc.ABC):
@@ -32,13 +35,29 @@ class StorageInterface(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def get_tasks(self):
+    def get_tasks(self) -> List[TaskDTO]:
         pass
 
     @abc.abstractmethod
-    def get_categories(self, category_ids):
+    def get_categories(self, category_ids: List[int]) -> List[CategoryDTO]:
         pass
 
     @abc.abstractmethod
-    def get_lables_for_tasks(self, task_ids):
+    def get_lables_for_tasks(self, task_ids: List[int]) -> List[TaskLableDTO]:
+        pass
+
+    @abc.abstractmethod
+    def get_all_categories(self):
+        pass
+
+    @abc.abstractmethod
+    def get_task(self, task_id: int):
+        pass
+
+    @abc.abstractmethod
+    def get_category_with_id(self, category_id: int):
+        pass
+
+    @abc.abstractmethod
+    def get_lables_for_task(self, task_id: int):
         pass
