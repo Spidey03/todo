@@ -102,7 +102,7 @@
         <div class="container">
             <h1>Add Task</h1>
             <div class="task_form">
-                <form action="/todo/add_task/confirm" method="post">
+                <form action="/add_task/confirm" method="post">
                     {% csrf_token %}
                     <div>
                         <label for="title">Title </label>
@@ -133,7 +133,7 @@
                         <p>{{ response.response }}</p>
                     </div>
                     <div class="more_actions">
-                        <a href="/todo/add_task" class="reset">Reset</a>
+                        <a href="/add_task" class="reset">Reset</a>
                         <input type="submit" value="Submit">
                     </div>
                 </form>

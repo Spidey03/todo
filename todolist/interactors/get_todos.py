@@ -13,13 +13,13 @@ class GetTodos:
         self.storage = storage
         self.presenter = presenter
 
-    def get_todos_wrapper(self):
-        task_details_dtos = self.get_todos()
+    def get_todos_wrapper(self, user_id: int):
+        task_details_dtos = self.get_todos(user_id=user_id)
         response = self.presenter.response_get_todos(task_details_dtos)
         return response
 
-    def get_todos(self):
-        tasks = self.storage.get_tasks()
+    def get_todos(self, user_id: int):
+        tasks = self.storage.get_tasks(user_id=user_id)
         task_ids = [task.id for task in tasks]
         category_ids = [task.category_id for task in tasks]
         categories = self.storage.get_categories(

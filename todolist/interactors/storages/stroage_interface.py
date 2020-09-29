@@ -1,7 +1,9 @@
 import abc
 from typing import List
 
-from todolist.interactors.storages.dtos import TaskDTO, CategoryDTO, TaskLableDTO
+from todolist.interactors.dtos import CreateUserDTO
+from todolist.interactors.storages.dtos import TaskDTO, CategoryDTO, \
+    TaskLableDTO
 
 
 class StorageInterface(abc.ABC):
@@ -35,7 +37,7 @@ class StorageInterface(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def get_tasks(self) -> List[TaskDTO]:
+    def get_tasks(self, user_id: int) -> List[TaskDTO]:
         pass
 
     @abc.abstractmethod
@@ -60,4 +62,24 @@ class StorageInterface(abc.ABC):
 
     @abc.abstractmethod
     def get_lables_for_task(self, task_id: int):
+        pass
+
+    @abc.abstractmethod
+    def validate_username(self, username: str):
+        pass
+
+    @abc.abstractmethod
+    def validate_password(self, username: str, password: str):
+        pass
+
+    @abc.abstractmethod
+    def create_user(self, user_dto: CreateUserDTO):
+        pass
+
+    @abc.abstractmethod
+    def check_username_is_taken(self, username):
+        pass
+
+    @abc.abstractmethod
+    def check_email_register_already(self, email):
         pass

@@ -7,7 +7,7 @@ from todolist.interactors.storages.stroage_interface import StorageInterface
 
 class AddNewTask(ValidationMixin):
     def __init__(self,
-                 storage=StorageInterface, presenter=PresenterInterface):
+                 storage: StorageInterface, presenter: PresenterInterface):
         self.storage = storage
         self.presenter = presenter
 

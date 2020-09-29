@@ -1,10 +1,64 @@
 from typing import List
 
-from todolist.interactors.storages.dtos import TaskDTO, CategoryDTO, TaskLableDTO
+from todolist.interactors.dtos import CreateUserDTO
+from todolist.interactors.storages.dtos import TaskDTO, CategoryDTO, \
+    TaskLableDTO
 from todolist.interactors.storages.stroage_interface import StorageInterface
 
 
 class StorageImplementation(StorageInterface):
+
+    def check_username_is_taken(self, username):
+        from todolist.models import User
+        from todolist.exceptions.exceptions import \
+            UsernameAlreadyTakenException
+        is_exist = User.objects.filter(username=username).exists()
+        if is_exist:
+            raise UsernameAlreadyTakenException()
+
+    def check_email_register_already(self, email):
+        from todolist.models import User
+        from todolist.exceptions.exceptions import \
+            UserAlreadyRegisteredWithThisEmailException
+        is_exist = User.objects.filter(email=email).exists()
+        if is_exist:
+            raise UserAlreadyRegisteredWithThisEmailException()
+
+    def create_user(self, user_dto: CreateUserDTO):
+        from todolist.models import User
+        user = User.objects.create(
+            username=user_dto.username,
+            email=user_dto.email,
+            bio=user_dto.email,
+            first_name=user_dto.first_name,
+            last_name=user_dto.last_name,
+            profile_pic=user_dto.profile_pic
+        )
+        user.set_password(user_dto.password1)
+        user.save()
+
+    def validate_username(self, username: str):
+        from todolist.models import User
+        print(User.objects.all())
+        is_user_exist = User.objects.filter(username=username).exists()
+        if not is_user_exist:
+            from todolist.exceptions.exceptions import \
+                UserDoesNotExistException
+            raise UserDoesNotExistException()
+
+    def validate_password(self, username: str, password: str):
+        from todolist.models import User
+        from todolist.exceptions.exceptions import \
+            UserDoesNotExistException
+        from todolist.exceptions.exceptions import InvalidPasswordException
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise UserDoesNotExistException()
+
+        if not user.check_password(password):
+            raise InvalidPasswordException()
+        return user.id
 
     def add_category(self, name: str):
         from todolist.models import Category
@@ -35,13 +89,13 @@ class StorageImplementation(StorageInterface):
         return lable.id
 
     def add_new_task(self, title, content, category, lable, date):
-        from todolist.models import Task
-        Task.objects.create(title=title, content=content,
-                            category_id=category, date=date)
+        from todolist.models import UserTask
+        UserTask.objects.create(title=title, content=content,
+                                category_id=category, date=date)
 
-    def get_tasks(self) -> List[TaskDTO]:
-        from todolist.models import Task
-        tasks = Task.objects.all()
+    def get_tasks(self, user_id: int) -> List[TaskDTO]:
+        from todolist.models import UserTask
+        tasks = UserTask.objects.filter(user_id=user_id)
         task_dtos = self._convert_to_task_dtos(tasks)
         return task_dtos
 
@@ -104,8 +158,8 @@ class StorageImplementation(StorageInterface):
             categories=categories)
 
     def get_task(self, task_id: int):
-        from todolist.models import Task
-        task = Task.objects.get(id=task_id)
+        from todolist.models import UserTask
+        task = UserTask.objects.get(id=task_id)
         return self._convert_to_task_dto(task=task)
 
     def get_category_with_id(self, category_id: int):
@@ -128,4 +182,3 @@ class StorageImplementation(StorageInterface):
                 )
             )
         return task_lable_dtos
-

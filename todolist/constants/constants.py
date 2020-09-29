@@ -1,5 +1,7 @@
 import enum
 
+PROFILE_PIC = "static/images/user.jpg"
+
 
 class StatusCode(enum.Enum):
     BadRequest = 400

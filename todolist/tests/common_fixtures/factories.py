@@ -54,7 +54,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
 class TaskFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = models.Task
+        model = models.UserTask
 
     id = factory.Sequence(lambda n: n)
     title = factory.Sequence(lambda n: "Title %03d" % n)

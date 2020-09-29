@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,91 +8,148 @@
                 integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <title>Todo App</title>
         <style>
-            .col-3{
-                border-radius: 10px;
-            }
+
             body{
-                background-color: black;
-                color: black;
+                padding: opx;
                 margin: 0px;
-                padding: 0px;
+                height: 100vh;
+                width: 100vw;
+                background-color: white;
+                color: black;
             }
 
             h1 {
                 text-align: center;
             }
-            .set_tasks, .set_tasks>div, .set_tasks>div>div{
-                height: 45vh;
-            }
-            .lable{
-                overflow: hidden;
-            }
-            .task{
+            .container-fluid{
+                font-family: cursive;
+                width: 100%;
                 height: 100%;
-                margin-left: -1%;
-                margin-right: -1%;
-                border-radius: 10px;
-                background-color: white;
-                box-shadow: 2px 2px 2px 2px #eeccff;
             }
-            .title{
+            .header, .footer{
+
+            }
+            .footer{
+                height: 12%;
+            }
+            .header{
+                height:8%;
+            }
+            .header{
+                font-size:200%;
                 font-weight: 900;
-                font-size: 200%;
             }
-            .description{
-                height: 65%;
-                font-size: 100%;
-                font-weight: 560;
+            .content{
+                height:80%;
             }
-            .small-details{
-                height: 30px;
-                font-size: 70%;
-                font-size: 80%;
+            .navbar{
+                display: block;
             }
 
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 200px;
+            }
+            .small_heading{
+                margin-top: 10%;
+                font-size: 120%;
+                font-weight: 700;
+            }
+            a {
+                display: block;
+                color: #000;
+                padding: 8px 16px;
+                text-decoration: none;
+                border-radius: 10px;
+            }
+            a:hover {
+                background-color: #555;
+                color: white;
+                text-decoration: none;
+            }
+            .tasks{
+                width: 80%;
+                height: 100%;
+                display: flex;
+                overflow-y: auto;
+            }
+            .task{
+                height: 40%;
+                border-radius: 10px;
+                box-shadow: 5px 5px 5px 5px grey;
+                margin: 1%;
+            }
+            .title{
+                height:13%;
+                font-size: 200%;
+                font-weight: 560;
+            }
+            .description{
+                height: 60%;
+                overflow-y: auto;
+            }
             .lables{
-                height: 10%;
+                display: flex;
+                align-items: center;
             }
-            .lable{
-                 font-size: 70%;
-                 margin-right: 1px;
-                 align-items: center;
-                 box-shadow: 2px 2px 2px 2px #eeccff;
-                 background-color: #a35cff;
-                 color: white;
+            .lables>p{
+                font-size: 100%;
+                justify-content: center;
+                border-radius: 5px;
+                margin-right: 3%;
+                box-shadow: 2px 2px 2px 2px #eeccff;
+                background-color: #a35cff;
+                color: white;
             }
-            .about{
-                background-color: white;
+            .category, .date{
+                display: inline-block;
+                width: 49%;
+                margin: auto;
             }
-            .col-9{
-                background-color: red;
-            }
+
         </style>
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row set_tasks justify-content-end">
-                <div class="col-3"></div>
-                <div class="col-9 justify-content-end align-items-end">
-                    <div class="row">
+            <div class="row header justify-content-start align-content-center">
+                <div class="col-1">
+                    <a href="/tasks">Home</a>
+                </div>
+            </div>
+            <div class="row content">
+                <ul class="col-2 navbar">
+                    <li class="small_heading"><a href="/tasks">Tasks</a></li>
+                    <li class="small_heading"><p>Categories</p></li>
+                    {% for category in categories %}
+                        <li><a href="/task/category/{{ category.id }}">{{ category.name }}</a></li>
+                    {% endfor %}
+                    <li class="small_heading"><p>Lables</p></li>
+                    {% for lable in lables %}
+                        <li><a href="/task/lable/{{ lable.id }}">{{ lable.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <div class="col-10">
+                    <div class="row tasks">
                         {% for task in todos %}
-                        <div class="task col-4 justify-contnet-around" onclick="location.href='todos/{{ task.task_id }}';" style="cursor:pointer;">
-                            <div class="row justify-content-around title">{{ task.title }}</div>
-                            <div class="row description">{{ task.content }}</div>
-                            <div class="row lables">
-                                {% for lable in task.lables %}
-                                <p class="col-3 lable">{{ lable }}</p>
-                                {% endfor %}
+                            <div class="col-3 task" onclick="location.href='todos/{{ task.task_id }}';" style="cursor:pointer;">
+                                <div class="title">{{ task.title }}</div>
+                                <div class="description">{{ task.content }}</div>
+                                <div class="lables">
+                                    {% for lable in task.lables %}
+                                        <p>{{ lable }}</p>
+                                    {% endfor %}
+                                </div>
+                                <div class="category">{{ task.category }}</div>
+                                <div class="date">{{ task.date }}</div>
                             </div>
-                            <div class="row justify-content-around small-details">
-                                <div class="col-5 category"> {{ task.category }}</div>
-                                <div class="col-5 time">{{ task.date }}</div>
-                            </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
+
+            <div class="row footer"></div>
         </div>
     </body>
 </html>

@@ -151,3 +151,132 @@ class PresenterImplementation(PresenterInterface):
         }
         return task_details
 
+    def raise_user_does_not_exist(self):
+        from todolist.constants.exception_messages \
+            import INVALID_USERNAME
+        response = INVALID_USERNAME[0]
+        res_status = INVALID_USERNAME[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_password_is_incorrect(self):
+        from todolist.constants.exception_messages \
+            import INVALID_PASSWORD
+        response = INVALID_PASSWORD[0]
+        res_status = INVALID_PASSWORD[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def get_response_login_user(self, tokens_dto):
+        response = {
+            "user_id": tokens_dto.user_id,
+            "access_token": tokens_dto.access_token,
+            "refresh_token": tokens_dto.refresh_token,
+            "expires_in": tokens_dto.expires_in,
+            "status_code": StatusCode.Success.value
+        }
+        return response
+
+    def user_created_successfully(self):
+        from todolist.constants.exception_messages \
+            import USER_CREATED_SUCCESSFULLY
+        response = USER_CREATED_SUCCESSFULLY[0]
+        res_status = USER_CREATED_SUCCESSFULLY[1]
+        http_status_code = StatusCode.Created_Success.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_username_should_not_be_empty(self):
+        from todolist.constants.exception_messages \
+            import USERNAME_SHOULD_NOT_BE_EMPTY
+        response = USERNAME_SHOULD_NOT_BE_EMPTY[0]
+        res_status = USERNAME_SHOULD_NOT_BE_EMPTY[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_email_is_invalid(self):
+        from todolist.constants.exception_messages \
+            import EMAIL_SHOULD_BE_VALID
+        response = EMAIL_SHOULD_BE_VALID[0]
+        res_status = EMAIL_SHOULD_BE_VALID[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_bio_is_empty(self):
+        from todolist.constants.exception_messages \
+            import BIO_SHOULD_NOT_BE_EMPTY
+        response = BIO_SHOULD_NOT_BE_EMPTY[0]
+        res_status = BIO_SHOULD_NOT_BE_EMPTY[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_password_not_match_to_constraints(self):
+        from todolist.constants.exception_messages \
+            import PASSWORD_SHOLUD_MATCH_CONSTRAINTS
+        response = PASSWORD_SHOLUD_MATCH_CONSTRAINTS[0]
+        res_status = PASSWORD_SHOLUD_MATCH_CONSTRAINTS[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_passwords_should_be_identical(self):
+        from todolist.constants.exception_messages \
+            import PASSWORD_SHOULD_BE_IDENTICAL
+        response = PASSWORD_SHOULD_BE_IDENTICAL[0]
+        res_status = PASSWORD_SHOULD_BE_IDENTICAL[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_username_already_taken(self):
+        from todolist.constants.exception_messages \
+            import USERNAME_ALREADY_TAKEN
+        response = USERNAME_ALREADY_TAKEN[0]
+        res_status = USERNAME_ALREADY_TAKEN[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def raise_user_already_register_with_this_email(self):
+        from todolist.constants.exception_messages \
+            import USER_ALREADY_REGISTERED_WITH_THIS_EMAIL
+        response = USER_ALREADY_REGISTERED_WITH_THIS_EMAIL[0]
+        res_status = USER_ALREADY_REGISTERED_WITH_THIS_EMAIL[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }

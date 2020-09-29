@@ -21,4 +21,4 @@ def add_task_confirm(request):
 
         if response['status_code'] != 201:
             return render(request, "add_task.html", {'response': response})
-        return redirect('/todo/add_task')
+        return redirect('/')

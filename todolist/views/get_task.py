@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 
 def get_task(request, task_id):
-
     from todolist.storages.storage_implementation import StorageImplementation
     from todolist.presenters.presenter_implementation import PresenterImplementation
     storage = StorageImplementation()
