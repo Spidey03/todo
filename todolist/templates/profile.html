@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="row content">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="row profile_details">
+            <img class="profile_pic col-7" src="/{{ user.profile_pic }}" alt="profile_pic">
+            <p class="name col-12">{{ user.firstname }}</p>
+            <p class="bio col-12">{{ user.bio }}</p>
+            <p class="col-12">{{ user.email }}</p>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+{% endblock %}

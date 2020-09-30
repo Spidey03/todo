@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="row content">
+    <div class="col-1"></div>
+    <form class="userdetails justify-content-center align-content-center" action="/tasks/task/{{task.task_id}}/update/" method="post">
+    {% csrf_token %}
+        <input class="col-10" id="title" type="text" name="title" placeholder="Title" value="{{ task.title }}">
+        <input class="col-10" id="content" type="text" name="content" placeholder="Content" value="{{ task.content }}">
+        <select class="col-10" id="category" name="category">
+            <option value="{{ task.category }}" selected>{{ task.category }}</option>
+            {% for category in categories %}
+            <option value="{{ category.name }}">{{ category.name }}</option>
+        {% endfor %}
+        </select>
+        <input class="col-10" id="date" type="text" name="date" placeholder="Date" value="{{ task.date }}">
+        <p>{{ response.response }}</p>
+        <div class="col-10 more_actions">
+            <a href="/tasks/task/{{task.task_id}}" class="reset">Reset</a>
+            <input type="submit" value="Submit" style="cursor:pointer;">
+        </div>
+    </form>
+</div>
+{% endblock %}

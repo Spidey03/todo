@@ -31,3 +31,13 @@ class TaskDetailsDTO:
     date: str
     category: str
     task_lables: List[TaskLableDTO]
+
+@dataclass
+class UserDetailsDTO:
+    user_id: int
+    username: str
+    email: str
+    firstname: str
+    lastname: str
+    bio: str
+    profile_pic: str

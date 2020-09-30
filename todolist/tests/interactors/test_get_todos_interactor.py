@@ -49,15 +49,15 @@ class TestGetTodosInteractor:
             self, storage_mock, presenter_mock,
             task_dtos, category_dtos, task_lable_dtos):
         # Arrange
-        from todolist.interactors.get_todos import GetTodos
-        interactor = GetTodos(storage=storage_mock, presenter=presenter_mock)
+        from todolist.interactors.get_tasks import GetTasks
+        interactor = GetTasks(storage=storage_mock, presenter=presenter_mock)
         storage_mock.get_tasks.return_value = task_dtos
         storage_mock.get_categories.return_value = category_dtos
         storage_mock.get_lables_for_tasks.return_value = task_lable_dtos
-        presenter_mock.response_get_todos.return_value = Mock()
+        presenter_mock.response_get_tasks.return_value = Mock()
 
         # Act
-        interactor.get_todos_wrapper()
+        interactor.get_tasks_wrapper()
 
         # Assert
-        presenter_mock.response_get_todos.assert_called_once()
+        presenter_mock.response_get_tasks.assert_called_once()

@@ -47,3 +47,33 @@ class ValidationMixin:
             PasswordsShouldBeIdentical
         if not password1 == password2:
             raise PasswordsShouldBeIdentical()
+
+    def _get_lable_if_valid(self, lable):
+        from todolist.exceptions.exceptions import \
+            InvalidLableException
+        if lable:
+            valid = self.storage.check_is_lable_valid(name=lable)
+            if not valid:
+                raise InvalidLableException()
+            return self.storage.get_lable(name=lable)
+
+    def _get_category_if_valid(self, category):
+        from todolist.exceptions.exceptions import \
+            InvalidCategoryException
+        if category:
+            valid = self.storage.check_is_category_valid(name=category)
+            if not valid:
+                raise InvalidCategoryException()
+            return self.storage.get_category(name=category)
+
+    def _validate_title(self, title):
+        from todolist.exceptions.exceptions import \
+            InvalidValueForTitleException
+        if type(title) != str or title == '':
+            raise InvalidValueForTitleException()
+
+    def _validate_content(self, content):
+        from todolist.exceptions.exceptions import \
+            InvalidValueForContentException
+        if type(content) != str or content == '':
+            raise InvalidValueForContentException()

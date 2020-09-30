@@ -37,7 +37,15 @@ class StorageInterface(abc.ABC):
         pass
 
     @abc.abstractmethod
+    def update_task(self, task_id, title, content, category_id, lables, date):
+        pass
+
+    @abc.abstractmethod
     def get_tasks(self, user_id: int) -> List[TaskDTO]:
+        pass
+
+    @abc.abstractmethod
+    def get_tasks_filter_by_category(self, user_id, category_id):
         pass
 
     @abc.abstractmethod
@@ -83,3 +91,16 @@ class StorageInterface(abc.ABC):
     @abc.abstractmethod
     def check_email_register_already(self, email):
         pass
+
+    @abc.abstractmethod
+    def get_tasks_filter_by_lable(self, user_id, lable_id):
+        pass
+
+    @abc.abstractmethod
+    def get_profile_details(self, user_id):
+        pass
+
+    @abc.abstractmethod
+    def check_task_id_valid(self, task_id):
+        pass
+    

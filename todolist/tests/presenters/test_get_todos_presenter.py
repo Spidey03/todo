@@ -42,7 +42,7 @@ class TestGetTodosPresenter:
         expected_output = todos_response
 
         # Act
-        response = presenter.response_get_todos(task_details_dto)
+        response = presenter.response_get_tasks(task_details_dto)
 
         # Assert
         assert response == expected_output

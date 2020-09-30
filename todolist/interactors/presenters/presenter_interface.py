@@ -32,7 +32,7 @@ class PresenterInterface(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def response_get_todos(self, task_details_dtos):
+    def response_get_tasks(self, task_details_dtos):
         pass
 
     @abc.abstractmethod
@@ -93,4 +93,12 @@ class PresenterInterface(abc.ABC):
 
     @abc.abstractmethod
     def raise_user_already_register_with_this_email(self):
+        pass
+
+    @abc.abstractmethod
+    def response_get_profile(self, user_details_dto):
+        pass
+
+    @abc.abstractmethod
+    def raise_task_not_found_exception(self):
         pass

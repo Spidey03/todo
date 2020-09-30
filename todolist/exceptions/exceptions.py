@@ -52,3 +52,7 @@ class InvalidValueForTitleException(Exception):
 
 class InvalidValueForContentException(Exception):
     pass
+
+
+class TaskIsNotExistException(Exception):
+    pass

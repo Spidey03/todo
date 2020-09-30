@@ -113,7 +113,7 @@ class PresenterImplementation(PresenterInterface):
             'status_code': http_status_code
         }
 
-    def response_get_todos(self, task_details_dtos):
+    def response_get_tasks(self, task_details_dtos):
         tasks = []
         for task in task_details_dtos:
             tasks.append(self._get_task_details(task_details_dto=task))
@@ -274,6 +274,30 @@ class PresenterImplementation(PresenterInterface):
             import USER_ALREADY_REGISTERED_WITH_THIS_EMAIL
         response = USER_ALREADY_REGISTERED_WITH_THIS_EMAIL[0]
         res_status = USER_ALREADY_REGISTERED_WITH_THIS_EMAIL[1]
+        http_status_code = StatusCode.BadRequest.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
+    def response_get_profile(self, user_details_dto):
+        user = {
+            "id": user_details_dto.user_id,
+            "name": user_details_dto.username,
+            "email": user_details_dto.email,
+            "bio": user_details_dto.bio,
+            "firstname": user_details_dto.firstname,
+            "lastname": user_details_dto.lastname,
+            "profile_pic": user_details_dto.profile_pic
+        }
+        return user
+
+    def raise_task_not_found_exception(self):
+        from todolist.constants.exception_messages \
+            import TASK_NOT_FOUND
+        response = TASK_NOT_FOUND[0]
+        res_status = TASK_NOT_FOUND[1]
         http_status_code = StatusCode.BadRequest.value
         return {
             'response': response,

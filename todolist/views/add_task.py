@@ -14,4 +14,20 @@ def add_task(request):
     from todolist.interactors.get_categories import GetCategories
     interactor = GetCategories(storage=storage, presenter=presenter)
     categories = interactor.get_categories_wrapper()
-    return render(request, "add_task.html", {'categories': categories})
+    # TODO: IMPLEMENT GET LABLE
+    from todolist.models import Lable
+    # TODO: IMPLEMENT GET USER
+    from todolist.models import User
+    user = User.objects.get(id=request.get.id)
+    lables = Lable.objects.all()
+    context = {
+        "title": {
+            "name": "Home",
+            "url": "/tasks"
+        },
+        "user": user,
+        "categories": categories,
+        "lables": lables
+    }
+    return render(request, "add_task.html", context)
+

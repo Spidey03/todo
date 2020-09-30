@@ -34,25 +34,3 @@ class AddNewTask(ValidationMixin):
         lable_id = self._get_lable_if_valid(lable)
         self.storage.add_new_task(title, content, category_id, lable_id,
                                   date=date)
-
-    def _get_lable_if_valid(self, lable):
-        if lable:
-            valid = self.storage.check_is_lable_valid(name=lable)
-            if not valid:
-                raise InvalidLableException()
-            return self.storage.get_lable(name=lable)
-
-    def _get_category_if_valid(self, category):
-        if category:
-            valid = self.storage.check_is_category_valid(name=category)
-            if not valid:
-                raise InvalidCategoryException()
-            return self.storage.get_category(name=category)
-
-    def _validate_title(self, title):
-        if type(title) != str or title == '':
-            raise InvalidValueForTitleException()
-
-    def _validate_content(self, content):
-        if type(content) != str or content == '':
-            raise InvalidValueForContentException()

@@ -69,3 +69,7 @@ USER_ALREADY_REGISTERED_WITH_THIS_EMAIL = (
 USER_CREATED_SUCCESSFULLY = (
     "user created successfully", "USER_CREATED_SUCCESSFULLY"
 )
+
+TASK_NOT_FOUND = (
+    "task not found", "TASK_NOT_FOUND"
+)

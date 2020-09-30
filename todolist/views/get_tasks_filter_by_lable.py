@@ -1,16 +1,19 @@
+
 from django.shortcuts import render
 
 
-def get_task(request, task_id):
+def get_task_filter_by_lable(request, lable_id: int):
     user_id = request.user.id
-    from todolist.storages.storage_implementation import StorageImplementation
-    from todolist.presenters.presenter_implementation import PresenterImplementation
-    storage = StorageImplementation()
+    from todolist.storages.storage_implementation \
+        import StorageImplementation
+    from todolist.presenters.presenter_implementation \
+        import PresenterImplementation
     presenter = PresenterImplementation()
-    from todolist.interactors.get_task import GetTask
-    interactor = GetTask(storage=storage, presenter=presenter)
-    task_details = interactor.get_task_wrapper(task_id)
-    categories = storage.get_all_categories()
+    storage = StorageImplementation()
+    from todolist.interactors.get_tasks import GetTasks
+    interactor = GetTasks(storage=storage, presenter=presenter)
+    tasks = interactor.get_tasks_filter_by_lable_wrapper(
+        user_id=user_id, lable_id=lable_id)
     # TODO: IMPLEMENT GET USER
     from todolist.models import User
     user = User.objects.get(id=user_id)
@@ -25,8 +28,9 @@ def get_task(request, task_id):
             "url": "/tasks"
         },
         "user": user,
-        "task": task_details,
+        "tasks": tasks,
         "categories": categories,
         "lables": lables
     }
-    return render(request, "task.html", context)
+    return render(request, "home.html", context)
+

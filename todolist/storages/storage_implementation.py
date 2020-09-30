@@ -2,7 +2,7 @@ from typing import List
 
 from todolist.interactors.dtos import CreateUserDTO
 from todolist.interactors.storages.dtos import TaskDTO, CategoryDTO, \
-    TaskLableDTO
+    TaskLableDTO, UserDetailsDTO
 from todolist.interactors.storages.stroage_interface import StorageInterface
 
 
@@ -78,6 +78,12 @@ class StorageImplementation(StorageInterface):
         category = Category.objects.get(name=name)
         return category.id
 
+    def get_all_categories(self):
+        from todolist.models import Category
+        categories = Category.objects.values('id', 'name')
+        category_dtos = self._convert_to_category_dtos(categories)
+        return category_dtos
+
     def check_is_category_valid(self, name: str):
         from todolist.models import Category
         is_exist = Category.objects.filter(name=name).exists()
@@ -93,9 +99,35 @@ class StorageImplementation(StorageInterface):
         UserTask.objects.create(title=title, content=content,
                                 category_id=category, date=date)
 
+    def update_task(self, task_id, title, content, category_id, lables, date):
+        from todolist.models import UserTask
+        UserTask.objects.create(
+            title=title,
+            content=content,
+            category_id=category_id,
+            date=date
+        )
+
     def get_tasks(self, user_id: int) -> List[TaskDTO]:
         from todolist.models import UserTask
         tasks = UserTask.objects.filter(user_id=user_id)
+        task_dtos = self._convert_to_task_dtos(tasks)
+        return task_dtos
+
+    def get_tasks_filter_by_category(self, user_id, category_id):
+        from todolist.models import UserTask
+        tasks = UserTask.objects.filter(
+            user_id=user_id, category_id=category_id)
+        task_dtos = self._convert_to_task_dtos(tasks)
+        return task_dtos
+
+    def get_tasks_filter_by_lable(self, user_id, lable_id):
+        from todolist.models import TaskLable
+        from todolist.models import UserTask
+        task_ids = TaskLable.objects.filter(lable_id=lable_id).values_list(
+            'task_id')
+        tasks = UserTask.objects.filter(
+            user_id=user_id, id__in=task_ids)
         task_dtos = self._convert_to_task_dtos(tasks)
         return task_dtos
 
@@ -182,3 +214,25 @@ class StorageImplementation(StorageInterface):
                 )
             )
         return task_lable_dtos
+
+    def get_profile_details(self, user_id):
+        from todolist.models import User
+        user = User.objects.get(id=user_id)
+        user_details_dto = UserDetailsDTO(
+            user_id=user.id,
+            username=user.username,
+            email=user.email,
+            firstname=user.first_name,
+            lastname=user.last_name,
+            bio=user.bio,
+            profile_pic=user.profile_pic
+        )
+        return user_details_dto
+
+    def check_task_id_valid(self, task_id):
+        from todolist.models import UserTask
+        from todolist.exceptions.exceptions import TaskIsNotExistException
+        is_exist = UserTask.objects.filter(id=task_id).exists()
+        not_exist = not is_exist
+        if not_exist:
+            raise TaskIsNotExistException()

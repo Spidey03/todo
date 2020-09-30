@@ -1,80 +1,197 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <title>Todo App</title>
         <style>
 
             body{
-                height: 95vh;
-                width: 95vw;
-                background-color: hsl(225, 100%, 75%);
+                padding: opx;
+                margin: 0px;
+                height: 100vh;
+                width: 100vw;
+                background: rgb(238,174,202);
+                background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+                color: black;
             }
-            h1 {
-                text-align: center;
-            }
-            .container{
+            .container-fluid{
                 font-family: cursive;
                 width: 100%;
                 height: 100%;
             }
-            .todos{
-                width:80%;
-                height: 80%;
-                overflow-y: scroll;
-                margin: auto;
-                background-color: hsl(225, 100%, 70%);
+            .header{
+                height:8%;
+            }
+            .header{
+                font-size:200%;
+                font-weight: 900;
+            }
+            .footer{
+                height: 12%;
+            }
+            .user{
+                margin-left: auto;
+                height: 100%;
+            }
+            .user>p{
+                display: inline-block;
+            }
+            .user>img{
+                height: 100%;
+                border-radius: 100%;
+            }
+            .content{
+                height:80%;
+            }
+            .navbar{
+                display: block;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 200px;
+            }
+            .small_heading{
+                margin-top: 10%;
+                font-size: 120%;
+                font-weight: 700;
+            }
+            a {
+                display: block;
+                color: #000;
+                padding: 8px 16px;
+                text-decoration: none;
                 border-radius: 10px;
-                overflow: false;
-                padding-left: 2vw;
-                padding-right: 2vw;
+            }
+            li a:hover {
+                background-color: #555;
+                color: white;
+                text-decoration: none;
+            }
+            .tasks{
+                width: 80%;
+                height: 100%;
+                display: flex;
+                overflow-y: auto;
             }
             .task{
-                height: 50px;
-                border-radius: 20px;
-                box-shadow: 0px -5px 0px 2px hsl(225, 100%, 75%);
-                display:flex;
-                margin-top: 3%;
+                height: 40%;
+                border-radius: 10px;
+                box-shadow: 5px 5px 5px 5px grey;
+                margin: 1%;
             }
-            .task>div{
-                margin: auto;
+            .task:hover{
+                background-color: #94bbe9;
             }
-            .task_content{
-                width: 50%;
-                margin-left: 5%;
+            .title{
+                height:13%;
+                font-size: 200%;
+                font-weight: 560;
             }
-
-            .more_actions{
-                width: 50%;
+            .description{
+                height: 60%;
+                overflow-y: auto;
+            }
+            .lables{
                 display: flex;
+                align-items: center;
+            }
+            .lables>p{
+                font-size: 100%;
+                justify-content: center;
+                border-radius: 5px;
+                margin-right: 3%;
+                box-shadow: 2px 2px 2px 2px rgba(148,187,233,1) 100%);
+                color: black;
+            }
+            .category, .date{
+                display: inline-block;
+                width: 49%;
                 margin: auto;
             }
-            .add_task, .del_task{
-                height: 50px;
-                width: 45%;
-                border-radius: 20px;
-                box-shadow: 0px 10px 0px 0px hsl(225, 100%, 70%);
-                margin: auto;
+            form{
+                margin-left: 10%;
+                padding-top: 10%;
+                width: 60%;
+                font-size: 150%;
+                font-family: Gill Sans, sans-serif;
             }
-            a{
-                color: #8A2BE2;
-                font-size: 160%;
-                font-weight: 700;
-                font-family: cursive;
-                background-color: transparent;
+            input[type=password], input[type=text], textarea, date, select {
+                width: 100%;
+                padding: 12px;
                 border: none;
+                background-color: white;
+                border-radius: 20px;
+                resize: vertical;
+                font-weight: 800;
+                margin: auto;
+                margin-top: 1%;
+            }
+            .more_actions{
+                width: 100%;
+                display: flex;
+            }
+            input[type=submit]{
+                color: black;
+                font-size: 120%;
+                font-weight: 700;
+                background-color: transparent;
+                border:none;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-decoration: none;
+                margin-left: auto;
+                margin-right: 15%;
+                margin-top: 1%;
             }
-            a:hover{
-                color: white;
+            .reset{
+                margin-right: auto;
+
             }
+            .col-1 a:hover {
+                text-decoration: none;
+            }
+            .profile_details{
+                justify-content: center;
+                text-align: center;
+            }
+            .profile_pic{
+                width: 100%;
+                border-radius: 10%;
+            }
+            .center{
+                text-align: center;
+            }
+            .name{
+                font-weight: 900;
+                font-size: 200%;
+            }
+
         </style>
     </head>
     <body>
-        {{ block container }}
+        <div class="container-fluid">
+            <div class="row header justify-content-start align-content-center">
+                <div class="col-1">
+                    <a href="{{title.url}}">{{title.name}}</a>
+                </div>
+                {% block user %}
+                    <div class=".col-3 user">
+                        <p>{{user.first_name}}</p>
+                        <img class="logo" src="/{{ user.profile_pic }}"  style="cursor:pointer;" onclick="location.href='/profile';">
+                    </div>
+                {% endblock %}
 
-        {{ endblock }}
+            </div>
+            {% block content %}
+            {% endblock %}
+            <div class="row footer"></div>
+        </div>
     </body>
 </html>
