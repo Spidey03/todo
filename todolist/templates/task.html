@@ -6,7 +6,7 @@
     <form class="userdetails justify-content-center align-content-center" action="/tasks/task/{{task.task_id}}/update/" method="post">
     {% csrf_token %}
         <input class="col-10" id="title" type="text" name="title" placeholder="Title" value="{{ task.title }}">
-        <input class="col-10" id="content" type="text" name="content" placeholder="Content" value="{{ task.content }}">
+        <textarea class="col-10" id="content" type="text" name="content" placeholder="Content">{{ task.content }}</textarea>
         <select class="col-10" id="category" name="category">
             <option value="{{ task.category }}" selected>{{ task.category }}</option>
             {% for category in categories %}

@@ -24,14 +24,13 @@
                 height: 100%;
             }
             .header{
-                height:8%;
-            }
-            .header{
+                height: 6vh;
                 font-size:200%;
                 font-weight: 900;
             }
             .footer{
-                height: 12%;
+                display: block;
+                height: 6vh;
             }
             .user{
                 margin-left: auto;
@@ -45,10 +44,15 @@
                 border-radius: 100%;
             }
             .content{
-                height:80%;
+                height:88%;
             }
             .navbar{
                 display: block;
+
+            }
+            .subnav{
+                max-height: 40vh;
+                overflow-y: auto;
             }
             ul {
                 list-style-type: none;
@@ -73,8 +77,16 @@
                 color: white;
                 text-decoration: none;
             }
+            .response{
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 500%;
+                font-weight: 900;
+            }
             .tasks{
-                width: 80%;
+                width: 100%;
                 height: 100%;
                 display: flex;
                 overflow-y: auto;
@@ -109,6 +121,9 @@
                 box-shadow: 2px 2px 2px 2px rgba(148,187,233,1) 100%);
                 color: black;
             }
+            .tags{
+                font-weight: 600;
+            }
             .category, .date{
                 display: inline-block;
                 width: 49%;
@@ -131,6 +146,11 @@
                 font-weight: 800;
                 margin: auto;
                 margin-top: 1%;
+            }
+            textarea{
+                height: 200px;
+                box-sizing: border-box;
+                resize: none;
             }
             .more_actions{
                 width: 100%;
@@ -163,7 +183,7 @@
             }
             .profile_pic{
                 width: 100%;
-                border-radius: 10%;
+                border-radius: 50%;
             }
             .center{
                 text-align: center;
@@ -191,7 +211,7 @@
             </div>
             {% block content %}
             {% endblock %}
-            <div class="row footer"></div>
+            <div class="footer"></div>
         </div>
     </body>
 </html>

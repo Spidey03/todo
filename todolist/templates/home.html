@@ -5,13 +5,17 @@
     <ul class="col-2 navbar">
         <li class="small_heading"><a href="/tasks">Tasks</a></li>
         <li class="small_heading"><p>Categories</p></li>
+        <div class="subnav">
         {% for category in categories %}
-        <li><a href="/tasks/category/{{ category.id }}">{{ category.name }}</a></li>
+            <li><a href="/tasks/category/{{ category.id }}">{{ category.name }}</a></li>
         {% endfor %}
+        </div>
         <li class="small_heading"><p>Lables</p></li>
+        <div class="subnav">
         {% for lable in lables %}
-        <li><a href="/tasks/lable/{{ lable.id }}">{{ lable.name }}</a></li>
+            <li><a href="/tasks/lable/{{ lable.id }}">{{ lable.name }}</a></li>
         {% endfor %}
+        </div>
     </ul>
     <div class="col-10">
         <div class="row tasks">
@@ -20,13 +24,17 @@
             <div class="title">{{ task.title }}</div>
             <div class="description">{{ task.content }}</div>
             <div class="lables">
-                <p>Lables: </p>
+                <p class="tags">Lables: </p>
                 {% for lable in task.lables %}
                 <p>{{ lable }}</p>
                 {% endfor %}
             </div>
-            <div class="category">{{ task.category }}</div>
-            <div class="date">{{ task.date }}</div>
+            <div class="tags category">{{ task.category }}</div>
+            <div class="tags date">{{ task.date }}</div>
+            </div>
+            {% empty %}
+            <div class="response col-12">
+                <p>NO TASKS AVAILABLE</p>
             </div>
             {% endfor %}
         </div>
