@@ -9,14 +9,13 @@ class GetTask:
         self.storage = storage
         self.presenter = presenter
 
-    def get_task_wrapper(self, task_id: int):
-        task_details_dto = self.get_task(task_id=task_id)
+    def get_task_wrapper(self, task_id: int, user_id: str):
+        task_details_dto = self.get_task(task_id=task_id, user_id=user_id)
         response = self.presenter.resposne_get_task(task_details_dto[0])
         return response
 
-
-    def get_task(self, task_id: int):
-        task = self.storage.get_task(task_id=task_id)
+    def get_task(self, task_id: int, user_id: str):
+        task = self.storage.get_task(task_id=task_id, user_id=user_id)
         category_id = task.category_id
         category_dto = self.storage.get_category_with_id(category_id=category_id)
         lable_dtos = self.storage.get_lables_for_task(task_id=task_id)

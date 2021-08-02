@@ -189,9 +189,9 @@ class StorageImplementation(StorageInterface):
         return self._convert_to_category_dtos(
             categories=categories)
 
-    def get_task(self, task_id: int):
+    def get_task(self, task_id: int, user_id: str):
         from todolist.models import UserTask
-        task = UserTask.objects.get(id=task_id)
+        task = UserTask.objects.get(id=task_id, user_id=user_id)
         return self._convert_to_task_dto(task=task)
 
     def get_category_with_id(self, category_id: int):

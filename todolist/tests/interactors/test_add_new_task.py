@@ -33,7 +33,7 @@ class TestAddNewTaskInteractor:
 
         # Act
         interactor.add_new_task_wrapper(
-            title=title, content=content, category=category, lable=lable,
+            title=title, content=content, category=category, label=lable,
             due_date=due_date)
 
         # Assert
@@ -54,7 +54,7 @@ class TestAddNewTaskInteractor:
 
         # Act
         interactor.add_new_task_wrapper(
-            title=title, content=content, category=category, lable=lable,
+            title=title, content=content, category=category, label=lable,
             due_date=due_date)
 
         # Assert
@@ -75,7 +75,7 @@ class TestAddNewTaskInteractor:
 
         # Act
         interactor.add_new_task_wrapper(
-            title=title, content=content, category=category, lable=lable,
+            title=title, content=content, category=category, label=lable,
             due_date=due_date)
 
         # Asserts

@@ -12,10 +12,10 @@ class AddNewTask(ValidationMixin):
         self.presenter = presenter
 
     def add_new_task_wrapper(
-            self, title: str, content: str, category, lable, date):
+            self, title: str, content: str, category, label, date):
         try:
             self.add_new_task(title=title, content=content,
-                              category=category, lable=lable, date=date)
+                              category=category, label=label, date=date)
             response = self.presenter.successfully_created_task()
         except InvalidValueForTitleException:
             response = self.presenter.raise_invalid_value_for_title()
@@ -27,10 +27,10 @@ class AddNewTask(ValidationMixin):
             response = self.presenter.raise_invalid_lable_exception()
         return response
 
-    def add_new_task(self, title, content, category, lable, date):
+    def add_new_task(self, title, content, category, label, date):
         self._validate_title(title=title)
         self._validate_content(content=content)
         category_id = self._get_category_if_valid(category)
-        lable_id = self._get_lable_if_valid(lable)
+        lable_id = self._get_lable_if_valid(label)
         self.storage.add_new_task(title, content, category_id, lable_id,
                                   date=date)

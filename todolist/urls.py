@@ -18,7 +18,6 @@ urlpatterns = [
     path(r'tasks/lable/<int:lable_id>/',
          todolist.views.get_tasks_filter_by_lable,
          name="TodoListByCategory"),
-    path(r'add_task/', views.add_task, name="AddTask"),
-    path(r'add_task/confirm/', views.add_task_confirm, name="AddTaskConfirm"),
+    path(r'add_task/', views.add_task, name="AddTaskConfirm"),
     path(r'tasks/task/<int:task_id>/', views.get_task, name="GetTask")
 ]

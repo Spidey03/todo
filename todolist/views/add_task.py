@@ -1,21 +1,29 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
-from todoapp.settings import LOGIN_REDIRECT_URL
-from todolist import utils
 
-
-@login_required(login_url=LOGIN_REDIRECT_URL)
 def add_task(request):
-    categories = utils.get_all_categories()
-    lables = utils.get_all_lables()
-    context = {
-        "title": {
-            "name": "Home",
-            "url": "/tasks"
-        },
-        "categories": categories,
-        "lables": lables
-    }
-    return render(request, "add_task.html", context)
+    if request.method == 'POST':
+        details = request.POST
+        title = details['title']
+        content = details['content']
+        date = details['date']
+        category = details.get('category', None)
+        label = details.get('label', 'Home')
 
+        from todolist.presenters.presenter_implementation import \
+            PresenterImplementation
+        from todolist.storages.storage_implementation import \
+            StorageImplementation
+        storage = StorageImplementation()
+        presenter = PresenterImplementation()
+        from todolist.interactors.add_task import AddNewTask
+        interactor = AddNewTask(storage=storage, presenter=presenter)
+
+        response = interactor.add_new_task_wrapper(
+            title=title, content=content, date=date, category=category,
+            label=label
+        )
+
+        if response['status_code'] != 201:
+            return render(request, "add_task.html", {'response': response})
+        return redirect('/')

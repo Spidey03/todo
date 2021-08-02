@@ -11,7 +11,7 @@ def get_task(request, task_id):
     presenter = PresenterImplementation()
     from todolist.interactors.get_task import GetTask
     interactor = GetTask(storage=storage, presenter=presenter)
-    task_details = interactor.get_task_wrapper(task_id)
+    task_details = interactor.get_task_wrapper(task_id=task_id, user_id=user_id)
     categories = utils.get_all_categories()
     lables = utils.get_all_lables()
     context = {

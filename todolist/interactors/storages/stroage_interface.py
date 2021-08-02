@@ -61,7 +61,7 @@ class StorageInterface(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def get_task(self, task_id: int):
+    def get_task(self, task_id: int, user_id: str):
         pass
 
     @abc.abstractmethod
