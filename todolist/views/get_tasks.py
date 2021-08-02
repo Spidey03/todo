@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from rest_framework.response import Response
 
 from todoapp.settings import LOGIN_REDIRECT_URL
 from todolist import utils
@@ -55,13 +55,9 @@ def get_tasks_filter_by_lable(request, lable_id: int):
 def send_response(request, tasks):
     categories = utils.get_all_categories()
     lables = utils.get_all_lables()
-    context = {
-        "title": {
-            "name": "Home",
-            "url": "/tasks"
-        },
+    response = {
         "tasks": tasks,
         "categories": categories,
         "lables": lables
     }
-    return render(request, "home.html", context)
+    return Response(response)

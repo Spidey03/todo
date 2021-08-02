@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from rest_framework.response import Response
 
 
 def login_action(request, username, password):
@@ -28,12 +28,6 @@ def login_confirm(request):
         interactor = Login(storage=storage, oauth_storage=oauthstorage)
         response = interactor.login_wrapper(username=username, password=password,
                                             presenter=presenter)
-        if response['status_code'] == 400:
-            return render(request, "login.html", {'response': response})
-        login_action(request=request, username=username, password=password)
-        valuenext = request.POST.get('next')
-        if valuenext:
-            return redirect(valuenext)
-        return redirect('/tasks')
+        return Response(response)
 
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from rest_framework.response import Response
 
 
 def get_profile(request):
@@ -12,13 +12,6 @@ def get_profile(request):
     interactor = GetProfile(storage=storage)
     response = interactor.get_profile_details_wrapper(
         user_id=user_id, presenter=presenter)
-    context = {
-        "title": {
-            "name": "Home",
-            "url": "/tasks"
-        },
-        "user": response
-    }
-    return render(request, "profile.html", context)
+    return Response(response)
 
 

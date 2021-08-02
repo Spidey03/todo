@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from rest_framework.response import Response
 
 from todolist.constants import constants
 
@@ -43,7 +43,4 @@ def signup_confirm(request):
         interactor = Signup(storage=storage)
 
         response = interactor.signup_wrapper(user_dto=user_dto, presenter=presenter)
-
-        if response['status_code'] == 400:
-            return render(request, "signup.html", )
-        return render(request, "login.html", )
+        return Response(response)

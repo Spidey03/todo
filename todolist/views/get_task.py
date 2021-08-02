@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from rest_framework.response import Response
 
 from todolist import utils
 
@@ -14,13 +14,9 @@ def get_task(request, task_id):
     task_details = interactor.get_task_wrapper(task_id=task_id, user_id=user_id)
     categories = utils.get_all_categories()
     lables = utils.get_all_lables()
-    context = {
-        "title": {
-            "name": "Home",
-            "url": "/tasks"
-        },
+    response = {
         "task": task_details,
         "categories": categories,
         "lables": lables
     }
-    return render(request, "task.html", context)
+    return Response(response)

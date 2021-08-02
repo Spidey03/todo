@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from rest_framework.response import Response
 
 
 def add_task(request):
@@ -24,6 +24,4 @@ def add_task(request):
             label=label
         )
 
-        if response['status_code'] != 201:
-            return render(request, "add_task.html", {'response': response})
-        return redirect('/')
+        return Response(response)

@@ -1,4 +1,4 @@
-from todolist.views import views, get_task, get_tasks
+from rest_framework.response import Response
 
 
 def update_task(request, task_id: int):
@@ -21,9 +21,7 @@ def update_task(request, task_id: int):
         interactor = UpdateTask(storage=storage)
         response = interactor.update_task_wrapper(
             task_details_dto=task_details_dto, presenter=presenter)
-        if response['status_code'] == 400:
-            return get_task(request, task_id=task_id)
-        return get_tasks(request)
+        return Response(response)
 
 
 def get_task_details_dto(category, content, date, task_id, title, user_id):
