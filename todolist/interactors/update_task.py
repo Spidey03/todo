@@ -33,7 +33,7 @@ class UpdateTask(ValidationMixin):
 
     def update_task(self, task_details_dto):
         self._validate_title(title=task_details_dto.title)
-        self._validate_content(content=task_details_dto.content)
+        # self._validate_content(content=task_details_dto.content)
         category_id = self._get_category_if_valid(task_details_dto.category)
 
         lable_id = self._get_lable_if_valid(task_details_dto.lables)

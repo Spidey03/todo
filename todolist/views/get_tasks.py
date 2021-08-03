@@ -58,5 +58,4 @@ def send_response(request, response):
     labels = utils.get_all_labels()
     response["response"]["categories"] = [category.__dict__ for category in categories]
     response["response"]["labels"] = [label.__dict__ for label in labels]
-
     return Response(response)

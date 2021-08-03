@@ -54,7 +54,8 @@ class ValidationMixin:
         if lable:
             valid = self.storage.check_is_lable_valid(name=lable)
             if not valid:
-                raise InvalidLableException()
+                # TODO: raise error
+                return  None
             return self.storage.get_lable(name=lable)
 
     def _get_category_if_valid(self, category):
@@ -63,7 +64,8 @@ class ValidationMixin:
         if category:
             valid = self.storage.check_is_category_valid(name=category)
             if not valid:
-                raise InvalidCategoryException()
+                # TODO: raise error
+                return None
             return self.storage.get_category(name=category)
 
     def _validate_title(self, title):

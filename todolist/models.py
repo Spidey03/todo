@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -19,12 +21,12 @@ class Label(models.Model):
 
 
 class UserTask(models.Model):
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=100)
     content = models.TextField(blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     lable = models.ManyToManyField(Label, through='TaskLable')
-    date = models.DateField()
+    date = models.DateField(default=datetime.today)
     editable = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     stage = models.BooleanField(default=False)

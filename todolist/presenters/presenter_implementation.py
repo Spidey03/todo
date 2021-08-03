@@ -113,6 +113,18 @@ class PresenterImplementation(PresenterInterface):
             'status_code': http_status_code
         }
 
+    def successfully_updated_task(self):
+        from todolist.constants.exception_messages \
+            import TASK_UPDATED_SUCCESSFULLY
+        response = TASK_UPDATED_SUCCESSFULLY[0]
+        res_status = TASK_UPDATED_SUCCESSFULLY[1]
+        http_status_code = StatusCode.Success.value
+        return {
+            'response': response,
+            'res_status': res_status,
+            'status_code': http_status_code
+        }
+
     def response_get_tasks(self, task_details_dtos):
         tasks = []
         for task in task_details_dtos:

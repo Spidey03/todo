@@ -1,15 +1,20 @@
+from datetime import datetime
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 
 @api_view(["POST"])
 def update_task(request, task_id: int):
     user_id = request.user.id
     if request.method == 'POST':
-        details = request.POST
+        details = request.data
         title = details['title']
-        content = details['content']
-        date = details['date']
-        category = details['category']
+        content = details.get('content', '')
+        date = details.get('date', str(datetime.today().date()))
+        category = details.get('category', None)
+        label = details.get('label', 'Home')
+
         task_details_dto = get_task_details_dto(
             category, content, date, task_id, title, user_id)
         from todolist.storages.storage_implementation import \
@@ -22,6 +27,7 @@ def update_task(request, task_id: int):
         interactor = UpdateTask(storage=storage)
         response = interactor.update_task_wrapper(
             task_details_dto=task_details_dto, presenter=presenter)
+        print(response)
         return Response(response)
 
 

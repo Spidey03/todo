@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'todolist',
     'oauth2_provider',
     'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'todoapp.urls'
@@ -131,3 +133,8 @@ DEFAULT_OAUTH_CLIENT_ID = ""
 DEFAULT_OAUTH_CLIENT_SECRET = ""
 DEFAULT_OAUTH_SCOPES = "read write"
 DEFAULT_ACCESS_TOKEN_EXPIRY_IN_SECONDS = 10000000
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3004",
+    "http://localhost:3004"
+]

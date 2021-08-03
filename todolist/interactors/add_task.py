@@ -29,7 +29,8 @@ class AddNewTask(ValidationMixin):
 
     def add_new_task(self, title, content, category, label, date):
         self._validate_title(title=title)
-        self._validate_content(content=content)
+        print(title, content, category, label, date)
+        # self._validate_content(content=content)
         category_id = self._get_category_if_valid(category)
         lable_id = self._get_lable_if_valid(label)
         self.storage.add_new_task(title, content, category_id, lable_id,

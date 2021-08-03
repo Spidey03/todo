@@ -96,12 +96,14 @@ class StorageImplementation(StorageInterface):
 
     def add_new_task(self, title, content, category, lable, date):
         from todolist.models import UserTask
-        UserTask.objects.create(title=title, content=content,
+        print(title, content, category, lable, date)
+        id = UserTask.objects.create(title=title, content=content,
                                 category_id=category, date=date)
+        print(id)
 
     def update_task(self, task_id, title, content, category_id, lables, date):
         from todolist.models import UserTask
-        UserTask.objects.create(
+        UserTask.objects.filter(id=task_id).update(
             title=title,
             content=content,
             category_id=category_id,
@@ -110,7 +112,8 @@ class StorageImplementation(StorageInterface):
 
     def get_tasks(self, user_id: int) -> List[TaskDTO]:
         from todolist.models import UserTask
-        tasks = UserTask.objects.filter(user_id=user_id)
+        # TODO: Filter with user
+        tasks = UserTask.objects.all()
         task_dtos = self._convert_to_task_dtos(tasks)
         return task_dtos
 

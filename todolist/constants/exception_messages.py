@@ -26,6 +26,10 @@ TASK_ADDED_SUCCESSFULLY = (
     'task added successfully', 'TASK_ADDED_SUCCESSFULLY'
 )
 
+TASK_UPDATED_SUCCESSFULLY = (
+    'task updated successfully', 'TASK_UPDATED_SUCCESSFULLY'
+)
+
 INVALID_VALUE_FOR_TITLE_EXCEPTION = (
     'Title should be valid', 'INVALID_VALUE_FOR_TITLE_EXCEPTION'
 )
