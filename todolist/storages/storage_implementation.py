@@ -65,12 +65,12 @@ class StorageImplementation(StorageInterface):
         Category.objects.create(name=name)
 
     def add_lable(self, name: str):
-        from todolist.models import Lable
-        Lable.objects.create(name=name)
+        from todolist.models import Label
+        Label.objects.create(name=name)
 
     def check_is_lable_valid(self, name: str):
-        from todolist.models import Lable
-        is_exist = Lable.objects.filter(name=name).exists()
+        from todolist.models import Label
+        is_exist = Label.objects.filter(name=name).exists()
         return is_exist
 
     def get_category(self, name: str):
@@ -90,8 +90,8 @@ class StorageImplementation(StorageInterface):
         return is_exist
 
     def get_lable(self, name):
-        from todolist.models import Lable
-        lable = Lable.objects.get(name=name)
+        from todolist.models import Label
+        lable = Label.objects.get(name=name)
         return lable.id
 
     def add_new_task(self, title, content, category, lable, date):
@@ -139,13 +139,16 @@ class StorageImplementation(StorageInterface):
             )
         return task_dtos
 
-    def _convert_to_task_dto(self, task):
+    def _convert_to_task_dto(self, task) -> TaskDTO:
         return TaskDTO(
             id=task.id,
             title=task.title,
             content=task.content,
             category_id=task.category_id,
-            date=str(task.date)
+            date=str(task.date),
+            editable=task.editable,
+            active=task.active,
+            stage=task.stage
         )
 
     def get_categories(self, category_ids: List[int]) -> List[CategoryDTO]:
@@ -167,10 +170,10 @@ class StorageImplementation(StorageInterface):
         return category_dtos
 
     def get_lables_for_tasks(self, task_ids: List[int]) -> List[TaskLableDTO]:
-        from todolist.models import TaskLable, Lable
+        from todolist.models import TaskLable, Label
         task_lables = TaskLable.objects.filter(task_id__in=task_ids)
         lable_ids = [task_lable.lable_id for task_lable in task_lables]
-        lables = Lable.objects.filter(id__in=lable_ids)
+        lables = Label.objects.filter(id__in=lable_ids)
         lable_dtos = []
         for task_lable in task_lables:
             for lable in lables:
@@ -203,8 +206,8 @@ class StorageImplementation(StorageInterface):
     def get_lables_for_task(self, task_id: int):
         from todolist.models import TaskLable
         lable_ids = TaskLable.objects.filter(task_id=task_id)
-        from todolist.models import Lable
-        lables = Lable.objects.filter(id__in=lable_ids)
+        from todolist.models import Label
+        lables = Label.objects.filter(id__in=lable_ids)
         task_lable_dtos = []
         for lable in lables:
             task_lable_dtos.append(

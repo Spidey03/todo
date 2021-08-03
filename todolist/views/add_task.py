@@ -1,6 +1,8 @@
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
+@api_view(["POST"])
 def add_task(request):
     if request.method == 'POST':
         details = request.POST

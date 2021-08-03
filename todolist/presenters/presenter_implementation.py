@@ -117,7 +117,12 @@ class PresenterImplementation(PresenterInterface):
         tasks = []
         for task in task_details_dtos:
             tasks.append(self._get_task_details(task_details_dto=task))
-        return tasks
+        return {
+            'response': {
+                "tasks": tasks
+            },
+            'status_code': 200
+        }
 
     @staticmethod
     def _get_lables_for_task(task_lables, task_id):

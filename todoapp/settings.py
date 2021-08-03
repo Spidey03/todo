@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todolist',
-    'oauth2_provider'
+    'oauth2_provider',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

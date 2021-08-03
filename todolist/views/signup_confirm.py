@@ -1,3 +1,4 @@
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from todolist.constants import constants
@@ -12,7 +13,7 @@ def create_user_dto(username, firstname, lastname, email, bio, password1,
                                     profile_pic=profile_pic)
     return create_user_dto
 
-
+@api_view(["POST"])
 def signup_confirm(request):
     if request.method == 'POST':
         details = request.POST

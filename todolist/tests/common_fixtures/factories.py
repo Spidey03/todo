@@ -65,7 +65,7 @@ class TaskFactory(factory.django.DjangoModelFactory):
 
 class LableFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = models.Lable
+        model = models.Label
 
     id = factory.Sequence(lambda n: n)
     name = factory.Sequence(lambda n: "Lable %03d" % n)

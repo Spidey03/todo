@@ -1,7 +1,7 @@
 from django.contrib import admin
 # from django.contrib.auth.admin import UserAdmin
 # Register your models here.
-from todolist.models import Category, Lable, UserTask, TaskLable, User
+from todolist.models import Category, Label, UserTask, TaskLable, User
 
 
 @admin.register(User)
@@ -26,7 +26,7 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('username',)
     filter_horizontal = ('groups', 'user_permissions',)
 admin.site.register(Category)
-admin.site.register(Lable)
+admin.site.register(Label)
 admin.site.register(UserTask)
 admin.site.register(TaskLable)
 # admin.site.register(User, UserAdmin)

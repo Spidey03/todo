@@ -1,3 +1,4 @@
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
@@ -5,12 +6,11 @@ def login_action(request, username, password):
     from django.contrib.auth import authenticate, login
 
     user = authenticate(request, username=username, password=password)
-    print(user)
     if user is not None:
         login(request, user)
         return True
 
-
+@api_view(["POST"])
 def login_confirm(request):
     if request.method == 'POST':
         details = request.POST

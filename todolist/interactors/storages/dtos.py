@@ -9,6 +9,9 @@ class TaskDTO:
     content: str
     category_id: int
     date: str
+    editable: bool = False
+    active: bool = False
+    stage: bool = False
 
 
 @dataclass

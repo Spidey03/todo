@@ -1,6 +1,7 @@
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-
+@api_view(["POST"])
 def update_task(request, task_id: int):
     user_id = request.user.id
     if request.method == 'POST':

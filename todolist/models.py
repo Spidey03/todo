@@ -11,7 +11,7 @@ class Category(models.Model):
         return f'{self.id} {self.name}'
 
 
-class Lable(models.Model):
+class Label(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -23,15 +23,18 @@ class UserTask(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    lable = models.ManyToManyField(Lable, through='TaskLable')
+    lable = models.ManyToManyField(Label, through='TaskLable')
     date = models.DateField()
+    editable = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
+    stage = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.title} {self.content}'
 
 
 class TaskLable(models.Model):
-    lable = models.ForeignKey(Lable, on_delete=models.CASCADE)
+    lable = models.ForeignKey(Label, on_delete=models.CASCADE)
     task = models.ForeignKey(UserTask, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from todoapp.settings import LOGIN_REDIRECT_URL
 from todolist import utils
 
 
-@login_required(login_url=LOGIN_REDIRECT_URL)
+@api_view(["GET"])
 def get_tasks(request):
     user_id = request.user.id
     from todolist.storages.storage_implementation \
@@ -47,17 +48,15 @@ def get_tasks_filter_by_lable(request, lable_id: int):
     storage = StorageImplementation()
     from todolist.interactors.get_tasks import GetTasks
     interactor = GetTasks(storage=storage, presenter=presenter)
-    tasks = interactor.get_tasks_filter_by_lable_wrapper(
+    response = interactor.get_tasks_filter_by_lable_wrapper(
         user_id=user_id, lable_id=lable_id)
-    return send_response(request, tasks)
+    return send_response(request, response)
 
 
-def send_response(request, tasks):
+def send_response(request, response):
     categories = utils.get_all_categories()
-    lables = utils.get_all_lables()
-    response = {
-        "tasks": tasks,
-        "categories": categories,
-        "lables": lables
-    }
+    labels = utils.get_all_labels()
+    response["response"]["categories"] = [category.__dict__ for category in categories]
+    response["response"]["labels"] = [label.__dict__ for label in labels]
+
     return Response(response)

@@ -14,9 +14,9 @@ def get_user_details(user_id: int):
     return user_dto
 
 
-def get_all_lables():
-    from todolist.models import Lable
-    lables = Lable.objects.values()
+def get_all_labels():
+    from todolist.models import Label
+    lables = Label.objects.values()
     lable_dtos = get_lable_dtos(lables)
     return lable_dtos
 

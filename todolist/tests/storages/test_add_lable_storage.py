@@ -15,5 +15,5 @@ class TestAddCategoryStorage:
         storage.add_lable(name=name)
 
         # Assert
-        from todolist.models import Lable
-        assert Lable.objects.all().count() == 1
+        from todolist.models import Label
+        assert Label.objects.all().count() == 1
