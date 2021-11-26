@@ -135,6 +135,8 @@ DEFAULT_OAUTH_SCOPES = "read write"
 DEFAULT_ACCESS_TOKEN_EXPIRY_IN_SECONDS = 10000000
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3004",
-    "http://localhost:3004"
+    "http://127.0.0.1:3000",
+    "http://localhost:3000"
 ]
+
+CSRF_COOKIE_HTTPONLY = False
